@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conforto Instantâneo | Bem-estar Digital Sob Demanda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-primario: #2563eb;
+            --azul-escuro: #1e40af;
+            --azul-claro: #dbeafe;
+            --cinza-claro: #f8fafc;
+            --cinza-medio: #e2e8f0;
+            --cinza-texto: #475569;
+            --branco: #ffffff;
+            --verde: #10b981;
+            --roxo: #8b5cf6;
+            --laranja: #f59e0b;
+            --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --sombra-grande: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--cinza-claro);
+            color: var(--cinza-texto);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1820&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px) brightness(0.9);
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--sombra);
+            transition: all 0.3s;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--azul-escuro);
+        }
+
+        .logo-tm {
+            font-size: 12px;
+            vertical-align: super;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--cinza-texto);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--azul-primario);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--azul-primario);
+        }
+
+        .cta-button {
+            background: var(--azul-primario);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: var(--sombra);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--azul-escuro);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--azul-escuro);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--cinza-texto);
+        }
+
+        /* Serviços em Grid */
+        .servicos {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: var(--sombra);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-bottom: 60px;
+        }
+
+        .grid-servicos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .servico {
+            background: var(--branco);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--sombra);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .servico:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--sombra-grande);
+        }
+
+        .servico-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .icon-azul {
+            background: var(--azul-claro);
+            color: var(--azul-primario);
+        }
+
+        .icon-verde {
+            background: #d1fae5;
+            color: var(--verde);
+        }
+
+        .icon-roxo {
+            background: #ede9fe;
+            color: var(--roxo);
+        }
+
+        .icon-laranja {
+            background: #fef3c7;
+            color: var(--laranja);
+        }
+
+        .servico h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-bottom: 15px;
+        }
+
+        .servico p {
+            color: var(--cinza-texto);
+            margin-bottom: 20px;
+        }
+
+        .preco {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--azul-escuro);
+            margin-bottom: 20px;
+        }
+
+        .btn-contratar {
+            display: block;
+            background: var(--azul-primario);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-contratar:hover {
+            background: var(--azul-escuro);
+        }
+
+        .critica-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-align: center;
+            font-weight: 600;
+            color: #dc2626;
+            font-size: 18px;
+            border-radius: 12px;
+        }
+
+        .servico:hover .critica-hover {
+            opacity: 1;
+        }
+
+        /* Depoimentos */
+        .depoimentos {
+            padding: 80px 0;
+        }
+
+        .grid-depoimentos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .depoimento {
+            background: var(--branco);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            border-left: 4px solid var(--azul-primario);
+            transition: transform 0.3s;
+        }
+
+        .depoimento:hover {
+            transform: translateY(-5px);
+        }
+
+        .depoimento p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--cinza-texto);
+        }
+
+        .autor {
+            font-weight: 600;
+            color: var(--azul-escuro);
+        }
+
+        /* Depoimentos de Médicos */
+        .medicos {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: var(--sombra);
+        }
+
+        .medicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .medico {
+            background: var(--branco);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .medico:hover {
+            transform: translateY(-5px);
+        }
+
+        .medico-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--azul-claro);
+        }
+
+        .medico h3 {
+            color: var(--azul-escuro);
+            margin-bottom: 10px;
+        }
+
+        .medico p.especialidade {
+            color: var(--verde);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .medico p.depoimento {
+            font-style: italic;
+            color: var(--cinza-texto);
+        }
+
+        /* Sobre o projeto - Inicialmente oculto */
+        .sobre-projeto {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: var(--sombra);
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sobre-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .sobre-projeto h2 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #dc2626;
+            margin-bottom: 40px;
+        }
+
+        .sobre-projeto p {
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        .citacao {
+            font-style: italic;
+            border-left: 4px solid var(--azul-primario);
+            padding-left: 20px;
+            margin: 30px 0;
+            color: var(--cinza-texto);
+            font-size: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--azul-escuro);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #93c5fd;
+        }
+
+        .footer-section a {
+            color: #bfdbfe;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #93c5fd;
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .grid-servicos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-text">Conforto Instantâneo<span class="logo-tm"></span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#servicos">Soluções</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#medicos">Aprovação Médica</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="cta-button" id="comece-agora">Comece Agora</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Bem-estar emocional instantâneo</h1>
+            <p>Solucione ansiedade, estresse e inseguranças com nossa tecnologia validada cientificamente. Resultados em poucos minutos.</p>
+            <a href="#servicos" class="cta-button">Conhecer Soluções</a>
+        </div>
+    </section>
+
+    <section id="servicos" class="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossas Soluções Inovadoras</h2>
+            <div class="grid-servicos">
+                <div class="servico">
+                    <div class="servico-icon icon-azul">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Alívio rápido de Ansiedade</h3>
+                    <p>Reduza sintomas de ansiedade em apenas 5 minutos com nossos pulsos neuronais calibrados.</p>
+                    <div class="preco">R$ 79,90/mês</div>
+                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <div class="critica-hover">
+                        A ansiedade precisa ser "resolvida" em 5 minutos? O que perdemos com essa urgência?
+                    </div>
+                </div>
+                
+                <div class="servico">
+                    <div class="servico-icon icon-verde">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Otimizador de Autoestima</h3>
+                    <p>Aumente sua confiança com reforço positivo algorítmico baseado em suas redes sociais.</p>
+                    <div class="preco">R$ 119,90/mês</div>
+                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <div class="critica-hover">
+                        Sua autoestima precisa de validação algorítmica? Quem define seu valor?
+                    </div>
+                </div>
+                
+                <div class="servico">
+                    <div class="servico-icon icon-roxo">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>Indutor de Sono Profundo</h3>
+                    <p>Durma em menos de 10 minutos com nossa tecnologia de frequências cerebrais personalizadas.</p>
+                    <div class="preco">R$ 99,90/mês</div>
+                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <div class="critica-hover">
+                        O descanso virou mais um produto de consumo? O que significa "comprar" o sono?
+                    </div>
+                </div>
+                
+                <div class="servico">
+                    <div class="servico-icon icon-azul">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Foco Absoluto</h3>
+                    <p>Elimine distrações e aumente sua produtividade em 300% com bloqueio neural de dispersões.</p>
+                    <div class="preco">R$ 149,90/mês</div>
+                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <div class="critica-hover">
+                        Produtividade a qualquer custo? O que estamos sacrificando por "foco"?
+                    </div>
+                </div>
+                
+                <div class="servico">
+                    <div class="servico-icon icon-verde">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Conector Social</h3>
+                    <p>Supere timidez e melhore suas habilidades sociais com simulações de IA em tempo real.</p>
+                    <div class="preco">R$ 129,90/mês</div>
+                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <div class="critica-hover">
+                        A conexão humana pode ser simulada? O que perdemos quando terceirizamos nossa socialização?
+                    </div>
+                </div>
+                
+                <div class="servico">
+                    <div class="servico-icon icon-roxo">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analisador de Progresso</h3>
+                    <p>Acompanhe sua evolução emocional com métricas precisas e relatórios semanais detalhados.</p>
+                    <div class="preco">R$ 89,90/mês</div>
+                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <div class="critica-hover">
+                        Suas emoções precisam ser medidas e quantificadas? O que não cabe nos gráficos?
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="depoimentos">
+        <div class="container">
+            <h2 class="section-title">Transformações Reais</h2>
+            <div class="grid-depoimentos">
+                <div class="depoimento">
+                    <p>"Eu sofria de ansiedade há anos e em apenas uma semana com o Alívio Imediato já me sinto uma pessoa nova. Vale cada centavo!"</p>
+                    <div class="autor">- Carla M., 34 anos</div>
+                </div>
+                <div class="depoimento">
+                    <p>"Nunca fui tão produtivo! O Foco Absoluto mudou completamente minha capacidade de trabalho. Recomendo para todos os profissionais."</p>
+                    <div class="autor">- Ricardo F., 41 anos</div>
+                </div>
+                <div class="depoimento">
+                    <p>"Como alguém que sempre teve dificuldade para dormir, o Indutor de Sono foi a solução que eu procurava há uma década. Milagroso!"</p>
+                    <div class="autor">- Patrícia L., 29 anos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="medicos" class="medicos">
+        <div class="container">
+            <h2 class="section-title">Aprovação e Recomendação Médica</h2>
+            <div class="medicos-grid">
+                <div class="medico">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dr. Roberto Silva" class="medico-img">
+                    <h3>Dr. Roberto Silva</h3>
+                    <p class="especialidade">Psiquiatra - CRM 12345</p>
+                    <p class="depoimento">"Recomendo a Conforto Instantâneo para meus pacientes como complemento à terapia. Os resultados são impressionantes."</p>
+                </div>
+                <div class="medico">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dra. Maria Santos" class="medico-img">
+                    <h3>Dra. Maria Santos</h3>
+                    <p class="especialidade">Neurologista - CRM 67890</p>
+                    <p class="depoimento">"A tecnologia de neuromodulação utilizada pela Conforto Instantâneo representa um avanço significativo no tratamento de transtornos de ansiedade."</p>
+                </div>
+                <div class="medico">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dr. Carlos Mendes" class="medico-img">
+                    <h3>Dr. Carlos Mendes</h3>
+                    <p class="especialidade">Psicólogo - CRP 54321</p>
+                    <p class="depoimento">"Incorporo as soluções da Conforto Instantâneo em meu protocolo terapêutico com resultados consistentes e duradouros."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="sobre-projeto">
+        <div class="container">
+            <div class="sobre-content">
+                <h2>Sobre Este Projeto Artístico</h2>
+                <p>Vivemos um momento único onde a saúde mental finalmente recebe atenção, mas simultaneamente se torna alvo de um mercado ávido por novas oportunidades de negócio.</p>
+                
+                <p class="citacao">"O que acontece com nossa humanidade quando buscamos respostas para dores emocionais em interfaces que funcionam com a mesma lógica de qualquer produto no mercado?"</p>
+                
+                <p>Este projeto artístico explora os limites entre cuidado genuíno e lógica de consumo através da Conforto Instantâneo, uma plataforma que imita uma startup de saúde mental. A proposta oferece uma experiência dupla: primeiro atração por promessas de solução rápida, depois confronto com as contradições dessas promessas.</p>
+                
+                <p>Mais do que denunciar enganos, este projeto reafirma verdades humanas fundamentais: algumas dores não têm solução imediata, bem-estar real não cabe em assinaturas, complexidade emocional resiste à padronização tecnológica, e permanecer humano (com imperfeições) continua sendo a forma mais autêntica de cuidado.</p>
+                
+                <p>Através da imitação de linguagens corporativas e apropriação crítica de estratégias de mercado, esta obra se estabelece como intervenção artística relevante na discussão sobre saúde mental no mundo digital.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Conforto Instantâneo</h3>
+                    <p>Bem-estar digital sob demanda</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <a href="mailto:contato@confortoinstantaneo.com">contato@confortoinstantaneo.com</a>
+                    <a href="tel:+5511999999999">+55 (11) 99999-9999</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Perguntas Frequentes</a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 Conforto Instantâneo. Projeto artístico crítico. Nenhum serviço é realmente oferecido.</p>
+                <p>Inspirado no livro "Mentira de Artista" de Fábio Oliveira Nunes e no trabalho de Minerva Cuevas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mostrar seção "Sobre" ao clicar em "Comece Agora"
+        document.getElementById('comece-agora').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.sobre-projeto').style.display = 'block';
+            document.querySelector('.sobre-projeto').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Mostrar seção "Sobre" ao clicar no link de navegação
+        document.getElementById('sobre-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.sobre-projeto').style.display = 'block';
+            document.querySelector('.sobre-projeto').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
