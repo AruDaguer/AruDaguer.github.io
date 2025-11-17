@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conforto Instantâneo | Bem-estar Digital Sob Demanda</title>
+    <title>Conforto Instantâneo | Arte que Cura</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --azul-primario: #2563eb;
-            --azul-escuro: #1e40af;
-            --azul-claro: #dbeafe;
-            --cinza-claro: #f8fafc;
-            --cinza-medio: #e2e8f0;
-            --cinza-texto: #475569;
-            --branco: #ffffff;
-            --verde: #10b981;
-            --roxo: #8b5cf6;
-            --laranja: #f59e0b;
-            --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --sombra-grande: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --preto: #000000;
+            --azul-escuro: #001f36;
+            --azul-esverdeado: #1c5560;
+            --verde-medio: #79ae92;
+            --amarelo-claro: #fbffcd;
+            --verde-neon: #79ae92;
+            --roxo-neon: #8a2be2;
+            --rosa-neon: #ff2a6d;
+            --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --sombra-destaque: 0 10px 15px -3px rgba(121, 174, 146, 0.5);
+            --sombra-roxo: 0 10px 15px -3px rgba(138, 43, 226, 0.5);
         }
 
         * {
@@ -29,24 +28,15 @@
         }
 
         body {
-            background-color: var(--cinza-claro);
-            color: var(--cinza-texto);
+            background: linear-gradient(135deg, var(--preto) 0%, var(--azul-escuro) 100%);
+            color: var(--amarelo-claro);
             line-height: 1.7;
             overflow-x: hidden;
+            transition: all 0.8s ease;
         }
 
-        .background-blur {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1820&q=80');
-            background-size: cover;
-            background-position: center;
-            filter: blur(8px) brightness(0.9);
-            opacity: 0.4;
-            z-index: -1;
+        body.revelado {
+            background: linear-gradient(135deg, var(--preto) 0%, #2a0a0a 100%);
         }
 
         .container {
@@ -57,14 +47,20 @@
 
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 31, 54, 0.95);
             backdrop-filter: blur(10px);
             padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: var(--sombra);
-            transition: all 0.3s;
+            transition: all 0.8s ease;
+            border-bottom: 2px solid var(--verde-neon);
+        }
+
+        body.revelado header {
+            background: rgba(42, 10, 10, 0.95);
+            border-bottom: 2px solid var(--rosa-neon);
         }
 
         .header-content {
@@ -82,12 +78,13 @@
         .logo-text {
             font-size: 24px;
             font-weight: 700;
-            color: var(--azul-escuro);
+            color: var(--verde-neon);
+            text-shadow: 0 0 10px rgba(121, 174, 146, 0.7);
         }
 
-        .logo-tm {
-            font-size: 12px;
-            vertical-align: super;
+        body.revelado .logo-text {
+            color: var(--rosa-neon);
+            text-shadow: 0 0 10px rgba(255, 42, 109, 0.7);
         }
 
         nav ul {
@@ -98,7 +95,7 @@
 
         nav a {
             text-decoration: none;
-            color: var(--cinza-texto);
+            color: var(--amarelo-claro);
             font-weight: 500;
             transition: color 0.3s;
             position: relative;
@@ -111,21 +108,21 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: var(--azul-primario);
+            background-color: var(--verde-neon);
             transition: width 0.3s;
+        }
+
+        body.revelado nav a:after {
+            background-color: var(--rosa-neon);
         }
 
         nav a:hover:after {
             width: 100%;
         }
 
-        nav a:hover {
-            color: var(--azul-primario);
-        }
-
         .cta-button {
-            background: var(--azul-primario);
-            color: white;
+            background: var(--verde-neon);
+            color: var(--azul-escuro);
             padding: 12px 24px;
             border-radius: 8px;
             text-decoration: none;
@@ -133,52 +130,196 @@
             transition: all 0.3s;
             box-shadow: var(--sombra);
             cursor: pointer;
+            border: none;
+            font-size: 16px;
         }
 
         .cta-button:hover {
-            background: var(--azul-escuro);
+            background: #8bc4a6;
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
+        /* Botão de Revelação */
+        .btn-revelar {
+            background: linear-gradient(45deg, var(--roxo-neon), var(--verde-neon));
+            color: var(--azul-escuro);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.5s ease;
+            box-shadow: var(--sombra-destaque);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            margin-left: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-revelar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(121, 174, 146, 0.6);
+        }
+
         /* Hero Section */
         .hero {
-            padding: 120px 0;
+            padding: 150px 0;
             text-align: center;
             position: relative;
+            background: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 31, 54, 0.8);
         }
 
         .hero h1 {
             font-size: 48px;
             font-weight: 800;
-            color: var(--azul-escuro);
+            color: var(--verde-neon);
             margin-bottom: 20px;
             line-height: 1.2;
+            text-shadow: 0 0 15px rgba(121, 174, 146, 0.7);
+        }
+
+        body.revelado .hero h1 {
+            color: var(--rosa-neon);
+            text-shadow: 0 0 15px rgba(255, 42, 109, 0.7);
         }
 
         .hero p {
             font-size: 20px;
             max-width: 700px;
             margin: 0 auto 40px;
-            color: var(--cinza-texto);
+            color: var(--amarelo-claro);
         }
 
-        /* Serviços em Grid */
-        .servicos {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.7);
+        /* Fundador Section */
+        .fundador {
+            padding: 100px 0;
+            background: rgba(28, 85, 96, 0.7);
             backdrop-filter: blur(5px);
-            border-radius: 20px;
             margin: 40px 0;
+            border-top: 3px solid var(--verde-neon);
+            border-bottom: 3px solid var(--verde-neon);
+        }
+
+        body.revelado .fundador {
+            background: rgba(85, 28, 28, 0.7);
+            border-top: 3px solid var(--rosa-neon);
+            border-bottom: 3px solid var(--rosa-neon);
+        }
+
+        .fundador-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .fundador-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
             box-shadow: var(--sombra);
+            border: 5px solid var(--verde-neon);
+            transition: all 0.8s ease;
+            cursor: pointer;
+            filter: sepia(0.3) hue-rotate(10deg);
+        }
+
+        .fundador-img:hover {
+            transform: scale(1.05);
+            filter: sepia(0) hue-rotate(0);
+        }
+
+        body.revelado .fundador-img {
+            border: 5px solid var(--rosa-neon);
+            filter: sepia(0.5) hue-rotate(300deg);
+        }
+
+        .fundador-info {
+            flex: 1;
+        }
+
+        .fundador-info h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--verde-neon);
+            margin-bottom: 15px;
+        }
+
+        body.revelado .fundador-info h2 {
+            color: var(--rosa-neon);
+        }
+
+        .fundador-info .titulo {
+            font-size: 20px;
+            color: var(--roxo-neon);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        body.revelado .fundador-info .titulo {
+            color: #ff8888;
+        }
+
+        .fundador-info p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .revelacao {
+            background: rgba(138, 43, 226, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 4px solid var(--roxo-neon);
+            display: none;
+        }
+
+        body.revelado .revelacao {
+            background: rgba(255, 42, 109, 0.2);
+            border-left: 4px solid var(--rosa-neon);
+        }
+
+        .revelacao h3 {
+            color: var(--roxo-neon);
+            margin-bottom: 10px;
+        }
+
+        body.revelado .revelacao h3 {
+            color: var(--rosa-neon);
+        }
+
+        /* Serviços */
+        .servicos {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            margin: 40px 0;
+            border-top: 3px solid var(--roxo-neon);
+            border-bottom: 3px solid var(--roxo-neon);
+        }
+
+        body.revelado .servicos {
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 3px solid var(--rosa-neon);
+            border-bottom: 3px solid var(--rosa-neon);
         }
 
         .section-title {
             text-align: center;
             font-size: 36px;
             font-weight: 700;
-            color: var(--azul-escuro);
+            color: var(--verde-neon);
             margin-bottom: 60px;
+            text-shadow: 0 0 10px rgba(121, 174, 146, 0.5);
+        }
+
+        body.revelado .section-title {
+            color: var(--rosa-neon);
+            text-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
         }
 
         .grid-servicos {
@@ -188,19 +329,28 @@
         }
 
         .servico {
-            background: var(--branco);
+            background: rgba(28, 85, 96, 0.3);
             border-radius: 12px;
             padding: 30px;
             box-shadow: var(--sombra);
-            transition: all 0.3s;
+            transition: all 0.8s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--cinza-medio);
+            border: 2px solid transparent;
         }
 
         .servico:hover {
             transform: translateY(-10px);
-            box-shadow: var(--sombra-grande);
+            box-shadow: var(--sombra-destaque);
+            border: 2px solid var(--verde-neon);
+        }
+
+        body.revelado .servico {
+            background: rgba(85, 28, 28, 0.3);
+        }
+
+        body.revelado .servico:hover {
+            border: 2px solid var(--rosa-neon);
         }
 
         .servico-icon {
@@ -212,51 +362,52 @@
             justify-content: center;
             margin-bottom: 20px;
             font-size: 24px;
+            background: var(--roxo-neon);
+            color: var(--amarelo-claro);
         }
 
-        .icon-azul {
-            background: var(--azul-claro);
-            color: var(--azul-primario);
-        }
-
-        .icon-verde {
-            background: #d1fae5;
-            color: var(--verde);
-        }
-
-        .icon-roxo {
-            background: #ede9fe;
-            color: var(--roxo);
-        }
-
-        .icon-laranja {
-            background: #fef3c7;
-            color: var(--laranja);
+        body.revelado .servico-icon {
+            background: var(--rosa-neon);
         }
 
         .servico h3 {
             font-size: 22px;
             font-weight: 700;
-            color: var(--azul-escuro);
+            color: var(--verde-neon);
             margin-bottom: 15px;
         }
 
+        body.revelado .servico h3 {
+            color: var(--rosa-neon);
+        }
+
         .servico p {
-            color: var(--cinza-texto);
+            color: var(--amarelo-claro);
             margin-bottom: 20px;
         }
 
         .preco {
             font-size: 28px;
             font-weight: 800;
-            color: var(--azul-escuro);
+            color: var(--verde-neon);
             margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .preco:hover {
+            color: var(--roxo-neon);
+            transform: scale(1.05);
+        }
+
+        body.revelado .preco {
+            color: var(--rosa-neon);
         }
 
         .btn-contratar {
             display: block;
-            background: var(--azul-primario);
-            color: white;
+            background: var(--verde-neon);
+            color: var(--azul-escuro);
             text-align: center;
             padding: 12px;
             border-radius: 8px;
@@ -266,7 +417,16 @@
         }
 
         .btn-contratar:hover {
-            background: var(--azul-escuro);
+            background: #8bc4a6;
+        }
+
+        body.revelado .btn-contratar {
+            background: var(--rosa-neon);
+            color: white;
+        }
+
+        body.revelado .btn-contratar:hover {
+            background: #ff5c8d;
         }
 
         .critica-hover {
@@ -275,7 +435,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 31, 54, 0.9);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -284,18 +444,64 @@
             transition: opacity 0.3s;
             text-align: center;
             font-weight: 600;
-            color: #dc2626;
+            color: var(--verde-neon);
             font-size: 18px;
             border-radius: 12px;
+        }
+
+        body.revelado .critica-hover {
+            background: rgba(42, 10, 10, 0.9);
+            color: var(--rosa-neon);
         }
 
         .servico:hover .critica-hover {
             opacity: 1;
         }
 
+        /* Obras de Arte (inicialmente ocultas) */
+        .obra-arte {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            display: none;
+        }
+
+        body.revelado .obra-arte {
+            display: block;
+        }
+
+        .obra-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid var(--verde-neon);
+        }
+
+        body.revelado .obra-img {
+            border: 2px solid var(--rosa-neon);
+        }
+
+        .obra-info {
+            font-size: 14px;
+            color: var(--amarelo-claro);
+        }
+
         /* Depoimentos */
         .depoimentos {
-            padding: 80px 0;
+            padding: 100px 0;
+            background: rgba(28, 85, 96, 0.7);
+            backdrop-filter: blur(5px);
+            border-top: 3px solid var(--verde-neon);
+            border-bottom: 3px solid var(--verde-neon);
+        }
+
+        body.revelado .depoimentos {
+            background: rgba(85, 28, 28, 0.7);
+            border-top: 3px solid var(--rosa-neon);
+            border-bottom: 3px solid var(--rosa-neon);
         }
 
         .grid-depoimentos {
@@ -305,93 +511,47 @@
         }
 
         .depoimento {
-            background: var(--branco);
+            background: rgba(0, 0, 0, 0.3);
             padding: 30px;
             border-radius: 12px;
             box-shadow: var(--sombra);
-            border-left: 4px solid var(--azul-primario);
-            transition: transform 0.3s;
+            border-left: 4px solid var(--verde-neon);
         }
 
-        .depoimento:hover {
-            transform: translateY(-5px);
+        body.revelado .depoimento {
+            border-left: 4px solid var(--rosa-neon);
         }
 
         .depoimento p {
             font-style: italic;
             margin-bottom: 20px;
-            color: var(--cinza-texto);
+            color: var(--amarelo-claro);
         }
 
         .autor {
             font-weight: 600;
-            color: var(--azul-escuro);
+            color: var(--verde-neon);
         }
 
-        /* Depoimentos de Médicos */
-        .medicos {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-            margin: 40px 0;
-            box-shadow: var(--sombra);
-        }
-
-        .medicos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .medico {
-            background: var(--branco);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--sombra);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .medico:hover {
-            transform: translateY(-5px);
-        }
-
-        .medico-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 20px;
-            border: 3px solid var(--azul-claro);
-        }
-
-        .medico h3 {
-            color: var(--azul-escuro);
-            margin-bottom: 10px;
-        }
-
-        .medico p.especialidade {
-            color: var(--verde);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .medico p.depoimento {
-            font-style: italic;
-            color: var(--cinza-texto);
+        body.revelado .autor {
+            color: var(--rosa-neon);
         }
 
         /* Sobre o projeto - Inicialmente oculto */
         .sobre-projeto {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
-            border-radius: 20px;
             margin: 40px 0;
-            box-shadow: var(--sombra);
             display: none;
             animation: fadeIn 0.8s ease;
+            border-top: 3px solid var(--roxo-neon);
+            border-bottom: 3px solid var(--roxo-neon);
+        }
+
+        body.revelado .sobre-projeto {
+            border-top: 3px solid var(--rosa-neon);
+            border-bottom: 3px solid var(--rosa-neon);
         }
 
         @keyframes fadeIn {
@@ -408,8 +568,14 @@
             text-align: center;
             font-size: 36px;
             font-weight: 700;
-            color: #dc2626;
+            color: var(--roxo-neon);
             margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        body.revelado .sobre-projeto h2 {
+            color: var(--rosa-neon);
+            text-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
         }
 
         .sobre-projeto p {
@@ -419,19 +585,30 @@
 
         .citacao {
             font-style: italic;
-            border-left: 4px solid var(--azul-primario);
+            border-left: 4px solid var(--verde-neon);
             padding-left: 20px;
             margin: 30px 0;
-            color: var(--cinza-texto);
+            color: var(--verde-neon);
             font-size: 20px;
+        }
+
+        body.revelado .citacao {
+            border-left: 4px solid var(--rosa-neon);
+            color: var(--rosa-neon);
         }
 
         /* Footer */
         footer {
             background: var(--azul-escuro);
-            color: white;
+            color: var(--amarelo-claro);
             padding: 60px 0 30px;
             margin-top: 80px;
+            border-top: 5px solid var(--verde-neon);
+        }
+
+        body.revelado footer {
+            background: #2a0a0a;
+            border-top: 5px solid var(--rosa-neon);
         }
 
         .footer-content {
@@ -443,11 +620,15 @@
 
         .footer-section h3 {
             margin-bottom: 20px;
-            color: #93c5fd;
+            color: var(--verde-neon);
+        }
+
+        body.revelado .footer-section h3 {
+            color: var(--rosa-neon);
         }
 
         .footer-section a {
-            color: #bfdbfe;
+            color: var(--amarelo-claro);
             text-decoration: none;
             display: block;
             margin-bottom: 10px;
@@ -455,18 +636,68 @@
         }
 
         .footer-section a:hover {
-            color: white;
+            color: var(--verde-neon);
+        }
+
+        body.revelado .footer-section a:hover {
+            color: var(--rosa-neon);
         }
 
         .copyright {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #93c5fd;
+            border-top: 1px solid rgba(251, 255, 205, 0.1);
+            color: var(--amarelo-claro);
             font-size: 14px;
         }
 
-        /* Responsividade */
+        /* Elementos Interativos */
+        .revelar-texto {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .texto-oculto {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: var(--roxo-neon);
+        }
+
+        body.revelado .texto-oculto {
+            color: var(--rosa-neon);
+        }
+
+        .revelar-texto:hover .texto-oculto {
+            opacity: 1;
+        }
+
+        .revelar-texto:hover .texto-visivel {
+            opacity: 0;
+        }
+
+        .contador-vitimas {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--azul-esverdeado);
+            color: var(--amarelo-claro);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 99;
+            box-shadow: var(--sombra);
+            display: none;
+            border: 2px solid var(--verde-neon);
+        }
+
+        body.revelado .contador-vitimas {
+            background: #5c2a2a;
+            border: 2px solid var(--rosa-neon);
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -494,117 +725,153 @@
             .grid-servicos {
                 grid-template-columns: 1fr;
             }
+            
+            .fundador-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .fundador-img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .btn-revelar {
+                margin-left: 0;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="background-blur"></div>
+    <!-- Contador de "vítimas" -->
+    <div class="contador-vitimas" id="contadorVitimas">
+        Clientes impactados: <span id="contador">0</span>
+    </div>
     
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-text">Conforto Instantâneo<span class="logo-tm"></span></div>
+                    <div class="logo-text">Conforto Instantâneo</div>
                 </div>
                 <nav>
                     <ul>
+                        <li><a href="#fundador">O Gênio</a></li>
                         <li><a href="#servicos">Soluções</a></li>
                         <li><a href="#depoimentos">Depoimentos</a></li>
-                        <li><a href="#medicos">Aprovação Médica</a></li>
                     </ul>
                 </nav>
-                <a href="#" class="cta-button" id="comece-agora">Comece Agora</a>
+                <div>
+                    <button class="cta-button" id="comece-agora">Comece Agora</button>
+                    <button class="btn-revelar" id="btn-revelar">
+                        <i class="fas fa-exclamation-triangle"></i> Revelar Verdade
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
-            <h1>Bem-estar emocional instantâneo</h1>
-            <p>Solucione ansiedade, estresse e inseguranças com nossa tecnologia validada cientificamente. Resultados em poucos minutos.</p>
-            <a href="#servicos" class="cta-button">Conhecer Soluções</a>
+            <h1>A verdadeira arte é só um reflexo dos sentimentos de quem a contempla</h1>
+            <p>Ou da falta deles. Descubra como o Dr. Salvador Monet revolucionou o bem-estar emocional através de estímulos artísticos neurologicamente calibrados.</p>
+            <button class="cta-button" id="conhecer-solucoes">Descubra Sua Cura</button>
+        </div>
+    </section>
+
+    <section id="fundador" class="fundador">
+        <div class="container">
+            <h2 class="section-title">O Visionário Por Trás da Revolução</h2>
+            <div class="fundador-content">
+                <!-- Foto de um artista real (Jackson Pollock) -->
+                <img src="https://i.pinimg.com/236x/9e/9d/7a/9e9d7a98831813cd02bf5b03b8d47e25.jpg" alt="Dr. Salvador Monet" class="fundador-img" id="fotoFundador">
+                <div class="fundador-info">
+                    <h2>Dr. Salvador Monet</h2>
+                    <p class="titulo">PhD em Neurociência Aplicada | Artista Terapêutico</p>
+                    <p>Com mais de 20 anos de experiência na interseção entre neurociência e arte terapia, o Dr. Covington dedicou sua vida a desenvolver soluções que democratizam o acesso à saúde mental.</p>
+                    <p>Formado pela prestigiada <span class="revelar-texto">Universidade de Stanford<span class="texto-oculto">(curso online não credenciado)</span></span>, ele já publicou mais de 50 artigos científicos e recebeu diversos prêmios internacionais por suas contribuições.</p>
+                    <p>"Minha missão é simples: oferecer alívio imediato para o sofrimento emocional através de estímulos artísticos precisos. Por que esperar meses por resultados quando a arte pode oferecer conforto em minutos?"</p>
+                    
+                    <div class="revelacao" id="revelacaoFundador">
+                        <h3>⚠️ A VERDADE SOBRE O "DR." COVINGTON</h3>
+                        <p>Alistair Covington não possui formação em neurociência. Ele é um artista fracassado que nunca conseguiu vender uma única obra em 15 anos de carreira.</p>
+                        <p>Sua "metodologia revolucionária" consiste em mostrar obras de arte famosas - que ele não criou - enquanto alega ter "calibrado neurologicamente" cada imagem.</p>
+                        <p>Em 2022, foi processado por violação de direitos autorais por usar obras de Van Gogh, Monet e Picasso sem autorização, vendendo-as como "tratamentos" personalizados.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="servicos" class="servicos">
         <div class="container">
-            <h2 class="section-title">Nossas Soluções Inovadoras</h2>
+            <h2 class="section-title">Nossas Soluções Artístico-Científicas</h2>
             <div class="grid-servicos">
                 <div class="servico">
-                    <div class="servico-icon icon-azul">
+                    <div class="servico-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Alívio rápido de Ansiedade</h3>
-                    <p>Reduza sintomas de ansiedade em apenas 5 minutos com nossos pulsos neuronais calibrados.</p>
+                    <h3>Alívio Imediato de Ansiedade</h3>
+                    <p>Reduza sintomas de ansiedade em apenas 5 minutos com nossos estímulos visuais neurologicamente calibrados. Resultados comprovados ou seu dinheiro de volta!</p>
                     <div class="preco">R$ 79,90/mês</div>
-                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <button class="btn-contratar">Compre Agora e Seja Feliz!</button>
+                    
+                    <!-- Obra de arte que será revelada -->
+                    <div class="obra-arte">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/320px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Noite Estrelada - Van Gogh" class="obra-img">
+                        <div class="obra-info">
+                            <strong>"Noite Estrelada" de Vincent Van Gogh</strong><br>
+                            Vendida como "Modulador Neural de Serotonina" por apenas R$ 79,90/mês
+                        </div>
+                    </div>
+                    
                     <div class="critica-hover">
-                        A ansiedade precisa ser "resolvida" em 5 minutos? O que perdemos com essa urgência?
+                        Sua ansiedade precisa ser "curada" com uma pintura de 1889? O que isso diz sobre como valorizamos a arte e nossas emoções?
                     </div>
                 </div>
                 
                 <div class="servico">
-                    <div class="servico-icon icon-verde">
+                    <div class="servico-icon">
                         <i class="fas fa-brain"></i>
                     </div>
                     <h3>Otimizador de Autoestima</h3>
-                    <p>Aumente sua confiança com reforço positivo algorítmico baseado em suas redes sociais.</p>
+                    <p>Aumente sua confiança com exposição controlada a padrões visuais de empoderamento. Sinta-se melhor consigo mesmo em apenas 3 sessões!</p>
                     <div class="preco">R$ 119,90/mês</div>
-                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <button class="btn-contratar">Adquira Autoconfiança Agora!</button>
+                    
+                    <div class="obra-arte">
+                        <img src="https://www.replikka.art/wp-content/uploads/2022/12/Piet-Mondriaan-Composition-A-90x91-1-scaled.jpg" alt="Composição - Mondrian" class="obra-img">
+                        <div class="obra-info">
+                            <strong>"Composição" de Piet Mondrian</strong><br>
+                            Vendida como "Ativador de Confiança Neural" por apenas R$ 119,90/mês
+                        </div>
+                    </div>
+                    
                     <div class="critica-hover">
-                        Sua autoestima precisa de validação algorítmica? Quem define seu valor?
+                        Sua autoestima precisa de validação através de um quadro abstrato? Quem lucra com sua insegurança?
                     </div>
                 </div>
                 
                 <div class="servico">
-                    <div class="servico-icon icon-roxo">
+                    <div class="servico-icon">
                         <i class="fas fa-bed"></i>
                     </div>
                     <h3>Indutor de Sono Profundo</h3>
-                    <p>Durma em menos de 10 minutos com nossa tecnologia de frequências cerebrais personalizadas.</p>
+                    <p>Durma em menos de 10 minutos com nossa tecnologia de padrões visuais relaxantes. Diga adeus às noites em claro!</p>
                     <div class="preco">R$ 99,90/mês</div>
-                    <a href="#" class="btn-contratar">Experimente Grátis</a>
+                    <button class="btn-contratar">Durma Como um Bebê Hoje!</button>
+                    
+                    <div class="obra-arte">
+                        <img src="https://www.meisterdrucke.pt/kunstwerke/1260px/Claude_Monet_-_Water_Lilies_1919_-_%28MeisterDrucke-382124%29.jpg" alt="Lírios d'Água - Monet" class="obra-img">
+                        <div class="obra-info">
+                            <strong>"Lírios d'Água" de Claude Monet</strong><br>
+                            Vendida como "Indutor de Ondas Cerebrais Theta" por apenas R$ 99,90/mês
+                        </div>
+                    </div>
+                    
                     <div class="critica-hover">
-                        O descanso virou mais um produto de consumo? O que significa "comprar" o sono?
-                    </div>
-                </div>
-                
-                <div class="servico">
-                    <div class="servico-icon icon-azul">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3>Foco Absoluto</h3>
-                    <p>Elimine distrações e aumente sua produtividade em 300% com bloqueio neural de dispersões.</p>
-                    <div class="preco">R$ 149,90/mês</div>
-                    <a href="#" class="btn-contratar">Experimente Grátis</a>
-                    <div class="critica-hover">
-                        Produtividade a qualquer custo? O que estamos sacrificando por "foco"?
-                    </div>
-                </div>
-                
-                <div class="servico">
-                    <div class="servico-icon icon-verde">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Conector Social</h3>
-                    <p>Supere timidez e melhore suas habilidades sociais com simulações de IA em tempo real.</p>
-                    <div class="preco">R$ 129,90/mês</div>
-                    <a href="#" class="btn-contratar">Experimente Grátis</a>
-                    <div class="critica-hover">
-                        A conexão humana pode ser simulada? O que perdemos quando terceirizamos nossa socialização?
-                    </div>
-                </div>
-                
-                <div class="servico">
-                    <div class="servico-icon icon-roxo">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Analisador de Progresso</h3>
-                    <p>Acompanhe sua evolução emocional com métricas precisas e relatórios semanais detalhados.</p>
-                    <div class="preco">R$ 89,90/mês</div>
-                    <a href="#" class="btn-contratar">Experimente Grátis</a>
-                    <div class="critica-hover">
-                        Suas emoções precisam ser medidas e quantificadas? O que não cabe nos gráficos?
+                        O descanso virou mais um produto de consumo? O que significa "comprar" o sono através de uma reprodução?
                     </div>
                 </div>
             </div>
@@ -613,45 +880,19 @@
 
     <section id="depoimentos" class="depoimentos">
         <div class="container">
-            <h2 class="section-title">Transformações Reais</h2>
+            <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
             <div class="grid-depoimentos">
                 <div class="depoimento">
-                    <p>"Eu sofria de ansiedade há anos e em apenas uma semana com o Alívio Imediato já me sinto uma pessoa nova. Vale cada centavo!"</p>
+                    <p>"Eu sofria de ansiedade há anos e em apenas uma semana com o Alívio Imediato já me sinto uma pessoa nova. As imagens são tão poderosas que quase acredito que funcionam!"</p>
                     <div class="autor">- Carla M., 34 anos</div>
                 </div>
                 <div class="depoimento">
-                    <p>"Nunca fui tão produtivo! O Foco Absoluto mudou completamente minha capacidade de trabalho. Recomendo para todos os profissionais."</p>
+                    <p>"Nunca dormi tão bem! O Indutor de Sono mudou completamente minha qualidade de vida. As cores são milagrosas, mesmo sendo apenas uma imagem que poderia ver em qualquer museu."</p>
                     <div class="autor">- Ricardo F., 41 anos</div>
                 </div>
                 <div class="depoimento">
-                    <p>"Como alguém que sempre teve dificuldade para dormir, o Indutor de Sono foi a solução que eu procurava há uma década. Milagroso!"</p>
+                    <p>"Como alguém que sempre teve baixa autoestima, o Otimizador foi a solução que eu procurava. Me sinto mais confiante a cada sessão, mesmo não entendendo como quadros abstratos podem fazer isso."</p>
                     <div class="autor">- Patrícia L., 29 anos</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="medicos" class="medicos">
-        <div class="container">
-            <h2 class="section-title">Aprovação e Recomendação Médica</h2>
-            <div class="medicos-grid">
-                <div class="medico">
-                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dr. Roberto Silva" class="medico-img">
-                    <h3>Dr. Roberto Silva</h3>
-                    <p class="especialidade">Psiquiatra - CRM 12345</p>
-                    <p class="depoimento">"Recomendo a Conforto Instantâneo para meus pacientes como complemento à terapia. Os resultados são impressionantes."</p>
-                </div>
-                <div class="medico">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dra. Maria Santos" class="medico-img">
-                    <h3>Dra. Maria Santos</h3>
-                    <p class="especialidade">Neurologista - CRM 67890</p>
-                    <p class="depoimento">"A tecnologia de neuromodulação utilizada pela Conforto Instantâneo representa um avanço significativo no tratamento de transtornos de ansiedade."</p>
-                </div>
-                <div class="medico">
-                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dr. Carlos Mendes" class="medico-img">
-                    <h3>Dr. Carlos Mendes</h3>
-                    <p class="especialidade">Psicólogo - CRP 54321</p>
-                    <p class="depoimento">"Incorporo as soluções da Conforto Instantâneo em meu protocolo terapêutico com resultados consistentes e duradouros."</p>
                 </div>
             </div>
         </div>
@@ -660,16 +901,16 @@
     <section id="sobre" class="sobre-projeto">
         <div class="container">
             <div class="sobre-content">
-                <h2>Sobre Este Projeto Artístico</h2>
-                <p>Vivemos um momento único onde a saúde mental finalmente recebe atenção, mas simultaneamente se torna alvo de um mercado ávido por novas oportunidades de negócio.</p>
+                <h2>A Verdade Por Trás do "Conforto Instantâneo"</h2>
+                <p>Esta não é uma empresa real, mas uma crítica artística à mercantilização do bem-estar emocional na era digital.</p>
                 
-                <p class="citacao">"O que acontece com nossa humanidade quando buscamos respostas para dores emocionais em interfaces que funcionam com a mesma lógica de qualquer produto no mercado?"</p>
+                <p class="citacao">"A verdadeira arte é só um reflexo dos sentimentos - ou a falta deles - de quem a contempla."</p>
                 
-                <p>Este projeto artístico explora os limites entre cuidado genuíno e lógica de consumo através da Conforto Instantâneo, uma plataforma que imita uma startup de saúde mental. A proposta oferece uma experiência dupla: primeiro atração por promessas de solução rápida, depois confronto com as contradições dessas promessas.</p>
+                <p>Este projeto questiona como transformamos emoções complexas em produtos de consumo. O "Dr." Salvador Monet  personifica o artista fracassado que descobriu como monetizar o sofrimento alheio, apropriando-se de obras que não criou e vendendo-as como "soluções" para problemas humanos profundos.</p>
                 
-                <p>Mais do que denunciar enganos, este projeto reafirma verdades humanas fundamentais: algumas dores não têm solução imediata, bem-estar real não cabe em assinaturas, complexidade emocional resiste à padronização tecnológica, e permanecer humano (com imperfeições) continua sendo a forma mais autêntica de cuidado.</p>
+                <p>Em uma sociedade obcecada por respostas rápidas, será que a arte - e nossas próprias emoções - podem ser reduzidas a assinaturas mensais e promessas vazias?</p>
                 
-                <p>Através da imitação de linguagens corporativas e apropriação crítica de estratégias de mercado, esta obra se estabelece como intervenção artística relevante na discussão sobre saúde mental no mundo digital.</p>
+                <p>Esta instalação convida você a refletir: O que acontece quando buscamos respostas para nossas dores emocionais em interfaces que funcionam com a mesma lógica de qualquer outro produto no mercado?</p>
             </div>
         </div>
     </section>
@@ -679,43 +920,111 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Conforto Instantâneo</h3>
-                    <p>Bem-estar digital sob demanda</p>
+                    <p>Uma reflexão artística sobre a mercantilização das emoções</p>
+                    <p>Por André Araújo Silva e Laura Daguer Del Santo</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contato</h3>
-                    <a href="mailto:contato@confortoinstantaneo.com">contato@confortoinstantaneo.com</a>
-                    <a href="tel:+5511999999999">+55 (11) 99999-9999</a>
+                    <h3>Referências Artísticas</h3>
+                    <a href="#" id="termos-link">Minerva Cuevas</a>
+                    <a href="#" id="privacidade-link">Institutional Critique</a>
+                    <a href="#" id="faq-link">Arte Conceitual</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Legal</h3>
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Política de Privacidade</a>
-                    <a href="#">Perguntas Frequentes</a>
+                    <h3>Contexto</h3>
+                    <a href="#">Mentira de Artista - Fábio Oliveira</a>
+                    <a href="#">Crítica do Consumo</a>
+                    <a href="#">Mercantilização das Emoções</a>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>© 2023 Conforto Instantâneo. Projeto artístico crítico. Nenhum serviço é realmente oferecido.</p>
-                <p>Inspirado no livro "Mentira de Artista" de Fábio Oliveira Nunes e no trabalho de Minerva Cuevas.</p>
+                <p>© 2025 Conforto Instantâneo - Instalação artística crítica. Projeto acadêmico.</p>
+                <p>Nenhum serviço real é oferecido. Esta é uma reflexão sobre a mercantilização do bem-estar emocional.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mostrar seção "Sobre" ao clicar em "Comece Agora"
-        document.getElementById('comece-agora').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('.sobre-projeto').style.display = 'block';
-            document.querySelector('.sobre-projeto').scrollIntoView({ behavior: 'smooth' });
+        // Botão de revelação que transforma o site
+        document.getElementById('btn-revelar').addEventListener('click', function() {
+            document.body.classList.toggle('revelado');
+            
+            if (document.body.classList.contains('revelado')) {
+                this.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar Verdade';
+                document.getElementById('revelacaoFundador').style.display = 'block';
+                document.getElementById('contadorVitimas').style.display = 'block';
+                document.querySelector('.sobre-projeto').style.display = 'block';
+                
+                // Revelar todas as obras de arte
+                document.querySelectorAll('.obra-arte').forEach(obra => {
+                    obra.style.display = 'block';
+                });
+            } else {
+                this.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Revelar Verdade';
+                document.getElementById('revelacaoFundador').style.display = 'none';
+                document.getElementById('contadorVitimas').style.display = 'none';
+                document.querySelector('.sobre-projeto').style.display = 'none';
+                
+                // Ocultar obras de arte
+                document.querySelectorAll('.obra-arte').forEach(obra => {
+                    obra.style.display = 'none';
+                });
+            }
         });
         
-        // Mostrar seção "Sobre" ao clicar no link de navegação
-        document.getElementById('sobre-link').addEventListener('click', function(e) {
+        // Revelar informações sobre o fundador ao clicar na foto
+        document.getElementById('fotoFundador').addEventListener('click', function() {
+            document.getElementById('revelacaoFundador').style.display = 'block';
+            document.getElementById('contadorVitimas').style.display = 'block';
+        });
+        
+        // Contador de interações
+        let contador = 0;
+        const contadorElemento = document.getElementById('contador');
+        
+        function atualizarContador() {
+            contador++;
+            contadorElemento.textContent = contador;
+        }
+        
+        // Registrar interações nos botões
+        document.querySelectorAll('.btn-contratar, .cta-button').forEach(botao => {
+            botao.addEventListener('click', function(e) {
+                e.preventDefault();
+                atualizarContador();
+                
+                if (this.id === 'comece-agora') {
+                    document.querySelector('.sobre-projeto').style.display = 'block';
+                    document.querySelector('.sobre-projeto').scrollIntoView({ behavior: 'smooth' });
+                }
+                
+                if (this.id === 'conhecer-solucoes') {
+                    document.getElementById('servicos').scrollIntoView({ behavior: 'smooth' });
+                }
+                
+                // Mostrar pop-up crítico ao tentar "contratar"
+                if (this.classList.contains('btn-contratar')) {
+                    alert("⚠️ SUA FELICIDADE REALMENTE VALE R$ 79,90 POR MÊS?\n\n'Você não precisa ser ansioso! Compre este produto por 80 reais!'\n\n[Esta é uma obra de arte crítica - nenhum serviço real será cobrado]");
+                }
+            });
+        });
+        
+        // Links de referências com informações
+        document.getElementById('termos-link').addEventListener('click', function(e) {
             e.preventDefault();
-            document.querySelector('.sobre-projeto').style.display = 'block';
-            document.querySelector('.sobre-projeto').scrollIntoView({ behavior: 'smooth' });
+            alert("REFERÊNCIA: Minerva Cuevas\n\nArtista mexicana conhecida por seu projeto 'Mejor Vida Corp.', que critica relações de troca capitalistas através de uma empresa fictícia.");
+        });
+        
+        document.getElementById('privacidade-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert("REFERÊNCIA: Institutional Critique\n\nPrática artística que questiona e expõe as estruturas de poder dentro de instituições, incluindo as corporações.");
+        });
+        
+        document.getElementById('faq-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert("REFERÊNCIA: Arte Conceitual\n\nMovimento artístico que prioriza o conceito por trás da obra em detrimento do objeto artístico em si.");
         });
     </script>
 </body>
